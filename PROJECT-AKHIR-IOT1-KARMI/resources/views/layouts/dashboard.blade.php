@@ -18,6 +18,7 @@
 
     <!-- TOP Nav Bar -->
     @include('layouts.dashboard.header')
+
     <!-- TOP Nav Bar END -->
 
     <!-- Page Content  -->
@@ -29,6 +30,7 @@
     </div>
   </div>
   <!-- Wrapper END -->
+  
   <!-- Footer -->
   @include('layouts.dashboard.footer')
   <!-- Footer END -->

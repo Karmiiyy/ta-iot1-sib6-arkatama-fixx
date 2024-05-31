@@ -18,7 +18,7 @@
 	<meta property="og:type" content="article" />
 
     <!-- Website Title -->
-    <title>Evolo - StartUp HTML Landing Page Template</title>
+    <title>Welcome to JK's IoT Panel</title>
     
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
@@ -100,8 +100,8 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="text-container">
-                            <h1><span class="turquoise">StartUp Landing</span> Page Template Free</h1>
-                            <p class="p-large">Use Evolo free landing page template to promote your business startup and generate leads for the offered services</p>
+                            <h1><span class="turquoise">Welcome to JK's</span> IoT Panel</h1>
+                            <p class="p-large">This is JK Landing Page</p>
                             <a class="btn-solid-lg page-scroll" href="{{ route('login') }}">Login</a>
                         </div> <!-- end of text-container -->
                     </div> <!-- end of col -->
