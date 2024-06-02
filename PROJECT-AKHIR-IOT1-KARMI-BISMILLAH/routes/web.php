@@ -20,8 +20,8 @@ Route::get('/dashboard', function () {
     return view('pages.dashboard', $data);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/', function () {
-    return view('pages_LEDControl');
+Route::get('/LEDControllers', function () {
+    return view('pages.LEDControl');
 })->middleware(['auth', 'verified']);
 
 Route::get('/sensors', function () {

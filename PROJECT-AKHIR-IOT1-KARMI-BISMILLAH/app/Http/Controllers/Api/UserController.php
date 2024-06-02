@@ -45,10 +45,24 @@ class UserController extends Controller
             'password_confirmation' => [
                 'required',
                 'same:password'
+            ],
+            'avatar' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png',
+                'max:2048'
             ]
         ]);
 
-        //         // membuat user baru
+        //unggah avatar
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = $avatar->store('avatars', 'public');
+
+            $validated['avatar'] = $avatarPath;
+        }
+
+        // membuat user baru
         $user = User::create($validated);
 
         return response()->json([
@@ -95,8 +109,21 @@ class UserController extends Controller
             'password_confirmation' => [
                 'required',
                 'same:password'
+            ],
+            'avatar' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png',
+                'max:2048'
             ]
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $avatar = $request->file('avatar');
+            $avatarPath = $avatar->store('avatars', 'public');
+
+            $validated['avatar'] = $avatarPath;
+        }
 
         $user = User::find($id);
         $user->update($validated);
