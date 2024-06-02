@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LEDController;
+use App\Http\Controllers\LedControllerDB;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SensorController;
 use App\Http\Controllers\UserController;
@@ -44,7 +45,11 @@ Route::middleware('auth')->group(function () {
     Route::get('Sensors', [SensorController::class, 'index'])->name('sensors.index');
 
     //LED Control
-    Route::get('LEDControllers', [LEDController::class, 'index'])->name('LEDControllers.index');
+    Route::get('LEDControllers', [LedControllerDB::class, 'index'])->name('LEDControllers.index');
+
+    Route::controller(LedControllerDB::class)->group(function() {
+    Route::get('/leds', 'index')->name ('led');
+});
 });
 
 

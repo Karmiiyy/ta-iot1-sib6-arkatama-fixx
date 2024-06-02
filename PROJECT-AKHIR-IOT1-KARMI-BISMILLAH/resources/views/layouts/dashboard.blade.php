@@ -38,6 +38,7 @@
   <!-- Optional JavaScript -->
   @include('layouts.dashboard._foot')
 
+
 </body>
 
 </html>

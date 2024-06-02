@@ -19,9 +19,9 @@ class LEDController extends Controller
         $data['title'] = 'LED Control';
         $data['breadcrumbs'][] = [
             'title' => 'LED Control',
-            'url' => 'LEDControllers.index'
+            'url' => 'LedControllerDB.index'
         ];
        
-        return view('pages.LEDControl.index', $data);
+        return view('LedControllerDB', $data);
     }
 }
