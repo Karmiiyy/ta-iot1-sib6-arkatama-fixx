@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Create a stylish landing page for your business startup and get leads for the offered services with this free HTML landing page template.">
     <meta name="author" content="Inovatik">
 
     <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
-	<meta property="og:site_name" content="" /> <!-- website name -->
-	<meta property="og:site" content="" /> <!-- website link -->
-	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
-	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
-	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
-	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
-	<meta property="og:type" content="article" />
+    <meta property="og:site_name" content="" /> <!-- website name -->
+    <meta property="og:site" content="" /> <!-- website link -->
+    <meta property="og:title" content="" /> <!-- title shown in the actual shared post -->
+    <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+    <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+    <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+    <meta property="og:type" content="article" />
 
     <!-- Website Title -->
-    <title>Welcome to JK's IoT Panel</title>
-    
+    <title>Mwelcome to JK's Landing Page</title>
+
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,400i,600,700,700i&amp;subset=latin-ext" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/fontawesome-all.css" rel="stylesheet">
     <link href="css/swiper.css" rel="stylesheet">
-	<link href="css/magnific-popup.css" rel="stylesheet">
-	<link href="css/styles.css" rel="stylesheet">
-	
-	<!-- Favicon  -->
+    <link href="css/magnific-popup.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <!-- Favicon  -->
     <link rel="icon" href="images/favicon.png">
 </head>
+
 <body data-spy="scroll" data-target=".fixed-top">
-    
+
     <!-- Preloader -->
-	<div class="spinner-wrapper">
+    <div class="spinner-wrapper">
         <div class="spinner">
             <div class="bounce1"></div>
             <div class="bounce2"></div>
@@ -42,7 +44,7 @@
         </div>
     </div>
     <!-- end of preloader -->
-    
+
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
@@ -51,7 +53,7 @@
 
         <!-- Image Logo -->
         <a class="navbar-brand logo-image" href="index.html"><img src="images/logo.svg" alt="alternative"></a>
-        
+
         <!-- Mobile Menu Toggle Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-awesome fas fa-bars"></span>
@@ -67,12 +69,28 @@
                 <li class="nav-item">
                     <a class="nav-link page-scroll" href="https://github.com/Karmiiyy">Contact</a>
                 </li>
+
+                @if (Auth::check())
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="{{ route('register') }}">Register</a>
+                    <a class="nav-link page-scroll" href="{{route('dashboard')}}">Dashboard</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link page-scroll" href="{{ route('login') }}">Login</a>
+                    <a class="nav-link page-scroll" href="{{route('logout')}}">Logout</a>
                 </li>
+
+                @else
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{{route('register')}}">Register</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link page-scroll" href="{{route('login')}}">Login</a>
+                </li>
+
+
+                @endif
+
             </ul>
             <span class="nav-item social-icons">
                 <span class="fa-stack">
@@ -100,9 +118,16 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="text-container">
-                            <h1><span class="turquoise">Welcome to JK's</span> IoT Panel</h1>
-                            <p class="p-large">This is JK Landing Page</p>
-                            <a class="btn-solid-lg page-scroll" href="{{ route('login') }}">Login</a>
+                            <h1><span class="turquoise">JK</span> IoT Panel</h1>
+                            <p class="p-large">All About JK</p>
+
+                            @if (Auth::check())
+                            <a class="btn-solid-lg page-scroll" href="{{route('dashboard')}}">Dashboard</a>
+
+                            @else
+                            <a class="btn-solid-lg page-scroll" href="{{route('login')}}">Login</a>
+
+                            @endif
                         </div> <!-- end of text-container -->
                     </div> <!-- end of col -->
                     <div class="col-lg-6">
@@ -123,7 +148,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h5>Trusted By</h5>
-                    
+
                     <!-- Image Slider -->
                     <div class="slider-container">
                         <div class="swiper-container image-slider">
@@ -211,7 +236,7 @@
                         </div>
                     </div>
                     <!-- end of card -->
-                    
+
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
@@ -239,10 +264,10 @@
         </div> <!-- end of container -->
     </div> <!-- end of basic-1 -->
     <!-- end of details 1 -->
-    
+
 
     <!-- Details Lightbox 1 -->
-	<div id="details-lightbox-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div id="details-lightbox-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="container">
             <div class="row">
                 <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
@@ -259,22 +284,28 @@
                     <p>Do you need to build lists for your email campaigns? It just got easier with Evolo.</p>
                     <ul class="list-unstyled li-space-lg">
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">List building framework</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">List building framework</div>
                         </li>
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">Easy database browsing</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">Easy database browsing</div>
                         </li>
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">User administration</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">User administration</div>
                         </li>
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">Automate user signup</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">Automate user signup</div>
                         </li>
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">Quick formatting tools</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">Quick formatting tools</div>
                         </li>
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">Fast email checking</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">Fast email checking</div>
                         </li>
                     </ul>
                     <a class="btn-solid-reg mfp-close page-scroll" href="#request">REQUEST</a> <a class="btn-outline-reg mfp-close as-button" href="#screenshots">BACK</a>
@@ -284,7 +315,7 @@
     </div> <!-- end of lightbox-basic -->
     <!-- end of details lightbox 1 -->
 
-    
+
     <!-- Details 2 -->
     <div class="basic-2">
         <div class="container">
@@ -321,7 +352,7 @@
 
 
     <!-- Details Lightbox 2 -->
-	<div id="details-lightbox-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div id="details-lightbox-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
         <div class="container">
             <div class="row">
                 <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
@@ -338,22 +369,28 @@
                     <p>Do you need to build lists for your email campaigns? It just got easier with Evolo.</p>
                     <ul class="list-unstyled li-space-lg">
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">List building framework</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">List building framework</div>
                         </li>
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">Easy database browsing</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">Easy database browsing</div>
                         </li>
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">User administration</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">User administration</div>
                         </li>
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">Automate user signup</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">Automate user signup</div>
                         </li>
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">Quick formatting tools</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">Quick formatting tools</div>
                         </li>
                         <li class="media">
-                            <i class="fas fa-check"></i><div class="media-body">Fast email checking</div>
+                            <i class="fas fa-check"></i>
+                            <div class="media-body">Fast email checking</div>
                         </li>
                     </ul>
                     <a class="btn-solid-reg mfp-close page-scroll" href="#request">REQUEST</a> <a class="btn-outline-reg mfp-close as-button" href="#screenshots">BACK</a>
@@ -389,19 +426,24 @@
                             <hr class="cell-divide-hr">
                             <ul class="list-unstyled li-space-lg">
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Improve Your Email Marketing</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">Improve Your Email Marketing</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">User And Admin Rights Control</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">User And Admin Rights Control</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">List Building And Cleaning</div>
+                                    <i class="fas fa-times"></i>
+                                    <div class="media-body">List Building And Cleaning</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">Collected Data Management</div>
+                                    <i class="fas fa-times"></i>
+                                    <div class="media-body">Collected Data Management</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">More Planning And Evaluation</div>
+                                    <i class="fas fa-times"></i>
+                                    <div class="media-body">More Planning And Evaluation</div>
                                 </li>
                             </ul>
                             <div class="button-wrapper">
@@ -424,19 +466,24 @@
                             <hr class="cell-divide-hr">
                             <ul class="list-unstyled li-space-lg">
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Improve Your Email Marketing</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">Improve Your Email Marketing</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">User And Admin Rights Control</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">User And Admin Rights Control</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">List Building And Cleaning</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">List Building And Cleaning</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Collected Data Management</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">Collected Data Management</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-times"></i><div class="media-body">More Planning And Evaluation</div>
+                                    <i class="fas fa-times"></i>
+                                    <div class="media-body">More Planning And Evaluation</div>
                                 </li>
                             </ul>
                             <div class="button-wrapper">
@@ -462,19 +509,24 @@
                             <hr class="cell-divide-hr">
                             <ul class="list-unstyled li-space-lg">
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Improve Your Email Marketing</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">Improve Your Email Marketing</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">User And Admin Rights Control</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">User And Admin Rights Control</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">List Building And Cleaning</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">List Building And Cleaning</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">Collected Data Management</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">Collected Data Management</div>
                                 </li>
                                 <li class="media">
-                                    <i class="fas fa-check"></i><div class="media-body">More Planning And Evaluation</div>
+                                    <i class="fas fa-check"></i>
+                                    <div class="media-body">More Planning And Evaluation</div>
                                 </li>
                             </ul>
                             <div class="button-wrapper">
@@ -579,7 +631,7 @@
             </div> <!-- end of row -->
             <div class="row">
                 <div class="col-lg-12">
-                    
+
                     <!-- Video Preview -->
                     <div class="image-container">
                         <div class="video-wrapper">
@@ -617,7 +669,7 @@
                     <div class="slider-container">
                         <div class="swiper-container card-slider">
                             <div class="swiper-wrapper">
-                                
+
                                 <!-- Slide -->
                                 <div class="swiper-slide">
                                     <div class="card">
@@ -629,7 +681,7 @@
                                     </div>
                                 </div> <!-- end of swiper-slide -->
                                 <!-- end of slide -->
-        
+
                                 <!-- Slide -->
                                 <div class="swiper-slide">
                                     <div class="card">
@@ -638,10 +690,10 @@
                                             <p class="testimonial-text">Evolo has always helped or startup to position itself in the highly competitive market of mobile applications. You will not regret using it!</p>
                                             <p class="testimonial-author">Marsha Singer - Developer</p>
                                         </div>
-                                    </div>        
+                                    </div>
                                 </div> <!-- end of swiper-slide -->
                                 <!-- end of slide -->
-        
+
                                 <!-- Slide -->
                                 <div class="swiper-slide">
                                     <div class="card">
@@ -650,17 +702,17 @@
                                             <p class="testimonial-text">Love their services and was so amazed with the support and results that I purchased Evolo for two years in a row. They are awesome.</p>
                                             <p class="testimonial-author">Roy Smith - Marketer</p>
                                         </div>
-                                    </div>        
+                                    </div>
                                 </div> <!-- end of swiper-slide -->
                                 <!-- end of slide -->
-                               
+
                             </div> <!-- end of swiper-wrapper -->
-        
+
                             <!-- Add Arrows -->
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
                             <!-- end of add arrows -->
-        
+
                         </div> <!-- end of swiper-container -->
                     </div> <!-- end of slider-container -->
                     <!-- end of card slider -->
@@ -683,7 +735,7 @@
             </div> <!-- end of row -->
             <div class="row">
                 <div class="col-lg-12">
-                    
+
                     <!-- Team Member -->
                     <div class="team-member">
                         <div class="image-wrapper">
@@ -808,7 +860,7 @@
                     </div>
                 </div> <!-- end of col -->
                 <div class="col-lg-6">
-                    
+
                     <!-- Contact Form -->
                     <form id="contactForm" data-toggle="validator" data-focus="false">
                         <div class="form-group">
@@ -827,7 +879,7 @@
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group checkbox">
-                            <input type="checkbox" id="cterms" value="Agreed-to-Terms" required>I have read and agree with Evolo's stated <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-conditions.html">Terms Conditions</a> 
+                            <input type="checkbox" id="cterms" value="Agreed-to-Terms" required>I have read and agree with Evolo's stated <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-conditions.html">Terms Conditions</a>
                             <div class="help-block with-errors"></div>
                         </div>
                         <div class="form-group">
@@ -904,11 +956,11 @@
                                 <i class="fab fa-linkedin-in fa-stack-1x"></i>
                             </a>
                         </span>
-                    </div> 
+                    </div>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
-    </div> <!-- end of footer -->  
+    </div> <!-- end of footer -->
     <!-- end of footer -->
 
 
@@ -921,10 +973,10 @@
                 </div> <!-- end of col -->
             </div> <!-- enf of row -->
         </div> <!-- end of container -->
-    </div> <!-- end of copyright --> 
+    </div> <!-- end of copyright -->
     <!-- end of copyright -->
-    
-    	
+
+
     <!-- Scripts -->
     <script src="js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
     <script src="js/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
@@ -935,4 +987,5 @@
     <script src="js/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
     <script src="js/scripts.js"></script> <!-- Custom scripts -->
 </body>
+
 </html>

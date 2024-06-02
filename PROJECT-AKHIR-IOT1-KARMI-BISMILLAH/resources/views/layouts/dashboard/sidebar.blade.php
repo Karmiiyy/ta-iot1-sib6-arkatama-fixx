@@ -16,18 +16,37 @@
     <nav class="iq-sidebar-menu">
       <ul id="iq-sidebar-toggle" class="iq-menu">
         <li class="iq-menu-title"><i class="ri-separator"></i><span>Navigasi</span></li>
-        <li>
-          <a href="dashboard.html" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
+        <li Class="
+        @if (request()->url() == route('dashboard'))
+          active
+        @endif
+        ">
+          <a href="{{route('dashboard')}}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Dashboard</span></a>
         </li>
-        <li>
-          <a href="user.html" class="iq-waves-effect"><i class="ri-user-line"></i><span>User</span></a>
+
+        <li class="
+        @if (request()->url() == route('users.index'))
+          active
+        @endif
+        ">
+          <a href="{{route('users.index')}}" class="iq-waves-effect"><i class="ri-user-line"></i><span>User</span></a>
         </li>
-        <li>
-          <a href="led-control.html" class="iq-waves-effect"><i class="ri-lightbulb-line"></i><span>LED
+
+        <li class="
+        @if (request()->url() == route('LEDControllers.index'))
+          active
+        @endif
+        ">
+          <a href="{{route('LEDControllers.index')}}" class="iq-waves-effect"><i class="ri-lightbulb-line"></i><span>LED
               Control</span></a>
         </li>
-        <li>
-          <a href="sensor.html" class="iq-waves-effect"><i class="ri-sensor-line"></i><span>Sensor</span></a>
+
+        <li Class="
+        @if (request()->url() == route('sensors.index'))
+          active
+        @endif
+        ">
+          <a href="{{route('sensors.index')}}" class="iq-waves-effect"><i class="ri-sensor-line"></i><span>Sensor</span></a>
         </li>
       </ul>
     </nav>
