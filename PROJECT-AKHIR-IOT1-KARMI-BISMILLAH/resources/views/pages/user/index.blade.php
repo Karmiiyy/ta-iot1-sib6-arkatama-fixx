@@ -24,26 +24,23 @@
                 <tbody>
                     @foreach ($users as $user)
                     <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->created_at->format('d M Y, H:i:s') }}</td>
+                        <td>
+                            <div class="flex align-items-center list-user-action">
+                                <a onclick="openEditModal('{{ $user->id }}')" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#">
+                                    <i class="ri-pencil-line"></i></a>
+
+                                <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        </td>
-        <tr>
-            @endforeach
     </div>
-    </td>
-    <td>{{$user->name}}</td>
-    <td>{{$user->email}}</td>
-    <td>{{$user->created_at->format('d M Y, H:i:s')}}</td>
-    <td>
-        <div class="flex align-items-center list-user-action">
-            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>
-            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
-        </div>
-    </td>
-    </tr>
-    </tbody>
-    </table>
-</div>
-</div>
 </div>
 
 <!-- Modal -->
@@ -81,4 +78,40 @@
         </div>
     </div>
 </div>
+
+<button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="...">
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+    </div>
+</div>
 @endsection
+
+@push('scripts')
+<script>
+    function createUser() {
+        //ambil form data
+        //kirim data ke server POST /user
+        //tampilkan pesan sukses
+        // reload halaman
+
+    }
+
+    function editUser() {
+
+    }
+
+    function deleteUser() {
+
+    }
+</script>
+@endpush

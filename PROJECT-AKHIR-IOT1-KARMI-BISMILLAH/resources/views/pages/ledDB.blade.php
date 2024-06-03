@@ -1,15 +1,15 @@
 @extends('layouts.dashboard')
 
-@section('title_menu', 'LED Control')
+@section('LEDController', 'LED Control')
 
 @section('content')
 <div class="card w-100">
     <div class="card-body">
-        <h5 class="card-title">LED Control</h5>
-        <h6 class="card-subtitle mb-2 text-muted"></h6>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class="fa-regular fa-square-plus"></i> Add LED
-        </button>
+        <h5 class="card-title">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-regular fa-square-plus"></i> Add LED
+            </button>
+        </h5>
     </div>
 </div>
 
