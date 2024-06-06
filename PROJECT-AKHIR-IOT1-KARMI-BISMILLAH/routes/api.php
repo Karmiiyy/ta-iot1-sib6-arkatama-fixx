@@ -15,6 +15,9 @@ Route::get('/user', function (Request $request) {
 // Route::put('/users/{id}', [UserController::class, 'update']);
 // Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
-// resource route
-Route::resource('users', UserController::class)
-    ->except(['create', 'edit']);
+//Route group api
+Route::group(['as' => 'api.'], function () {
+    // resource route
+    Route::resource('users', UserController::class)
+        ->except(['create', 'edit']);
+});

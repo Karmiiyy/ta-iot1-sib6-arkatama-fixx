@@ -24,13 +24,13 @@
     <!-- Page Content  -->
     <div id="content-page" class="content-page">
       <div class="container-fluid">
-          @yield('content')
+        @yield('content')
 
       </div>
     </div>
   </div>
   <!-- Wrapper END -->
-  
+
   <!-- Footer -->
   @include('layouts.dashboard.footer')
   <!-- Footer END -->

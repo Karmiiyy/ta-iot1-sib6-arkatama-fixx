@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\LEDController;
+
 use App\Http\Controllers\LedControllerDB;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SensorController;

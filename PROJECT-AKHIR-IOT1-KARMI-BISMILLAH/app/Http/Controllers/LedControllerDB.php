@@ -11,6 +11,6 @@ class LedControllerDB extends Controller
         $Leds = LED::all(); //select * from led
         $data['leds'] = $Leds;
 
-        return view ('pages.ledDB', $data);
+        return view ('pages.LedDB', $data);
     }
 }
