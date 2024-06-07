@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // membuat validasi
+        // mmebuat validasi
         $validated = $request->validate([
             'name'      => [
                 'required',
@@ -42,19 +42,19 @@ class UserController extends Controller
                 'required',
                 'min:8'
             ],
-        //     'password_confirmation' => [
-        //         'required',
-        //         'same:password'
-        //     ],
-        //     'avatar' => [
-        //         'nullable',
-        //         'image',
-        //         'mimes:jpg,jpeg,png',
-        //         'max:2048'
-        //     ]
+            // 'password_confirmation' => [
+            //     'required',
+            //     'same:password'
+            // ],
+            // 'avatar'    => [
+            //     'nullable',
+            //     'image',
+            //     'mimes:jpg,jpeg,png',
+            //     'max:2048' // 2MB
+            // ]
         ]);
 
-        // //unggah avatar
+        // unggah avatar
         // if ($request->hasFile('avatar')) {
         //     $avatar = $request->file('avatar');
         //     $avatarPath = $avatar->store('avatars', 'public');
@@ -71,10 +71,9 @@ class UserController extends Controller
         ], 201);
     }
 
-    //     /**
-    //      * Display the specified resource.
-    //      */
-
+    /**
+     * Display the specified resource.
+     */
     public function show(string $id)
     {
         $user = User::find($id);
@@ -85,9 +84,9 @@ class UserController extends Controller
     }
 
 
-    //     /**
-    //      * Update the specified resource in storage.
-    //      */
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, string $id)
     {
         $validated = $request->validate([
@@ -100,29 +99,37 @@ class UserController extends Controller
             'email'     => [
                 'required',
                 'email',
-                'unique:users,email'
+                'unique:users,email,' . $id
             ],
             'password'  => [
-                'required',
+                'nullable',
                 'min:8'
             ],
-            'password_confirmation' => [
-                'required',
-                'same:password'
-            ],
-            'avatar' => [
-                'nullable',
-                'image',
-                'mimes:jpg,jpeg,png',
-                'max:2048'
-            ]
+            // 'password_confirmation' => [
+            //     'required',
+            //     'same:password'
+            // ],
+            // 'avatar'    => [
+            //     'nullable',
+            //     'image',
+            //     'mimes:jpg,jpeg,png',
+            //     'max:2048' // 2MB
+            // ]
         ]);
 
-        if ($request->hasFile('avatar')) {
-            $avatar = $request->file('avatar');
-            $avatarPath = $avatar->store('avatars', 'public');
+        // unggah avatar
+        // if ($request->hasFile('avatar')) {
+        //     $avatar = $request->file('avatar');
+        //     $avatarPath = $avatar->store('avatars', 'public');
 
-            $validated['avatar'] = $avatarPath;
+        //     $validated['avatar'] = $avatarPath;
+        // }
+
+        // jika ada password baru, maka update password
+        if ($request->filled('password')) {
+            $validated['password'] = bcrypt($validated['password']);
+        }else{
+            unset($validated['password']);
         }
 
         $user = User::find($id);
@@ -134,9 +141,9 @@ class UserController extends Controller
         ], 200);
     }
 
-    //     /**
-    //      * Remove the specified resource from storage.
-    //  */
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy(string $id)
     {
         $user = User::find($id);
