@@ -29,7 +29,7 @@
           active
         @endif
         ">
-          <a href="{{route('users.index')}}" class="iq-waves-effect"><i class="ri-user-line"></i><span>User</span></a>
+          <a href="{{route('users.index')}}" class="iq-waves-effect"><i class="ri-user-line"></i><span>Pengguna</span></a>
         </li>
 
         <li class="

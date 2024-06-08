@@ -17,6 +17,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Role</th>
                         <th>Join Date</th>
                         <th>Action</th>
                     </tr>
@@ -26,6 +27,17 @@
                     <tr>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>
+                            @if ($user->role == 'admin')
+                            <span class="badge badge-primary">
+                                <i class="ri-user-star-fill"></i>
+                                Admin</span>
+                            @else
+                            <span class="badge badge-secondary">
+                                <i class="ri-user-fill"></i>>
+                                User</span>
+                            @endif
+                        </td>
                         <td>{{ $user->created_at->format('d M Y, H:i:s') }}</td>
                         <td>
                             <div class="flex align-items-center list-user-action">
@@ -65,6 +77,15 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="addRole">Role</label>
+                        <select class="form-control" id="addRole" name="role">
+                            <option value="admin">Admin</option>
+                            <option value="user" selected>User</option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
                         <label for="addPassword">Password</label>
                         <input required type="password" class="form-control" id="addPassword" name="password">
                     </div>
@@ -100,9 +121,16 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="editPassword">Password</label>
-                        <input required type="password" class="form-control" id="editPassword" name="password">
-                    </div>
+                        <label for="editRole">Role</label>
+                        <select class="form-control" id="editRole" name="role">
+                            <option value="admin">Admin</option>
+                            <option value="user">User</option>
+                        </select>
+
+                        <div class="form-group">
+                            <label for="editPassword">Password</label>
+                            <input required type="password" class="form-control" id="editPassword" name="password">
+                        </div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -115,6 +143,7 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     let userId = null;
 
@@ -138,6 +167,7 @@
             name: $('#addName').val(),
             email: $('#addEmail').val(),
             password: $('#addPassword').val(),
+            role: $('#addRole').val()
         }
 
         // kirim data ke server POST /users
@@ -194,6 +224,7 @@
             name: $('#editName').val(),
             email: $('#editEmail').val(),
             password: $('#editPassword').val(),
+            role: $('#editRole').val(),
             _method: 'PUT'
         }
 
@@ -206,7 +237,7 @@
                 // reload halaman setelah 3 detik
                 setTimeout(() => {
                     location.reload()
-                }, 3000);
+                }, 1000);
             })
             .fail((error) => {
                 // ambil response error
@@ -245,24 +276,38 @@
     }
 
     function deleteUser(userId) {
-        let url = "{{ route('api.users.destroy', ':userId') }}";
-        url = url.replace(':userId', userId);
+        Swal.fire({
+            title: 'Apakah kamu yakin?',
+            text: 'User akan dihapus, kamu tidak bisa mengembalikannya lagi!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let url = "{{ route('api.users.destroy', ':userId') }}";
+                url = url.replace(':userId', userId);
 
-        $.post(url, {
-                _method: "DELETE"
-            })
-            .done((response) => {
-                // tampilkan pesan sukses
-                toastr.success(response.message, 'Sukses')
-                // reload halaman setelah 3 detik
-                setTimeout(() => {
-                    location.reload()
-                }, 1000);
-            })
-            .fail((error) => {
-                // tampilkan pesan error
-                toastr.error('Gagal menghapus user', 'Error')
-            })
+                $.post(url, {
+                        _method: "DELETE"
+                    })
+                    .done((response) => {
+                        // tampilkan pesan sukses
+                        toastr.success(response.message, 'Sukses')
+                        // reload halaman setelah 3 detik
+                        setTimeout(() => {
+                            location.reload()
+                        }, 1000);
+                    })
+                    .fail((error) => {
+                        // tampilkan pesan error
+                        toastr.error('Gagal menghapus user', 'Error')
+                    })
+            }
+        })
+
+
     }
 
     function openEditModal(id) {
@@ -278,9 +323,12 @@
                 // isi form editModal dengan data user
                 $('#editName').val(response.data.name);
                 $('#editEmail').val(response.data.email);
+                $('#editRole').val(response.data.role);
+
 
                 // tampilkan modal editModal
                 $('#editModal').modal('show');
+
             })
             .fail((error) => {
                 // tampilkana pesan error

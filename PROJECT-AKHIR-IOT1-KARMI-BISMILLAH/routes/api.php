@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\MqSensorController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,4 +21,6 @@ Route::group(['as' => 'api.'], function () {
     // resource route
     Route::resource('users', UserController::class)
         ->except(['create', 'edit']);
+
+    Route::resource('sensors/mq', MqSensorController::class);
 });
