@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class MqSensor extends Model
 {
     use HasFactory;
+
+    // protected $fillable = [
+    // 'value'
+    // ];
+
+    protected $guarded = [];
 }

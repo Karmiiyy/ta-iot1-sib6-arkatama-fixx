@@ -15,6 +15,38 @@ class MqSensorController extends Controller
             ->get();
 
         return response()
-            ->json($sensorsData, 200);
+            ->json([
+                'data' => $sensorsData,
+                'message' => 'Success'
+            ], 200);
+           }
+
+    function show($id)
+    {
+        $sensorData = MqSensor::find($id);
+
+        if ($sensorData) {
+            return response()
+                ->json($sensorData, 200);
+        } else {
+            return response()
+                ->json(['message' => 'Data not found'], 404);
+        }
+    }
+
+    function store(Request $request)
+    {
+        $request->validate([
+            'value' => [
+                'required',
+                'numeric',
+
+            ]
+        ]);
+
+        $sensorData = MqSensor::create($request->all());
+
+        return response()
+            ->json($sensorData, 201);
     }
 }
