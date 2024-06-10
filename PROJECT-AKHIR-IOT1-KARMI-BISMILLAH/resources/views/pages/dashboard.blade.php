@@ -5,29 +5,32 @@
     <div class="col-sm-12 col-md-7">
         <div class="card iq-mb-3">
             <div class="card-body">
-                <h4 class="card-title">Monitoring MQ Sensor</h4>
-                <p class="card-text">Grafik berikut adalah monitoring MQ Sensor 3 menit terakhir</p>
+                <h4 class="card-title">Monitoring Sensor Gas</h4>
+                <p class="card-text">Grafik berikut adalah monitoring sensor gas 3 menit terakhir.</p>
 
-                <div id="chartGas"></div>
+                <div id="monitoringGas"></div>
 
-                <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit yang lalu</small></p>
+                <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit lalu</small></p>
             </div>
         </div>
     </div>
+
     <div class="col-sm-12 col-md-5">
         <div class="card iq-mb-3">
             <div class="card-body">
-                <h4 class="card-title">Monitoring MQ Sensor</h4>
-                <p class="card-text">Grafik berikut adalah monitoring MQ Sensor 3 menit terakhir</p>
+                <h4 class="card-title">Monitoring Gas</h4>
+                <p class="card-text">Grafik berikut adalah monitoring sensor gas 3 menit terakhir.</p>
 
-                <div id="gaugeGas"></div>
+                <div id="monitoringGas"></div>
 
-                <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit yang lalu</small></p>
+                <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit lalu</small></p>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
+
 @push('scripts')
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
@@ -38,16 +41,16 @@
 <script>
     let chartGas;
 
-    async function requestgauge() {
-        //load data
+    async function requestData() {
+        // load data
         const result = await fetch("{{ route('api.sensors.mq.index') }}");
 
         if (result.ok) {
-            //cek jika berhasil
+            // cek jika berhasil
             const data = await result.json();
             const sensorData = data.data;
 
-            //parse data
+            // parse data
             const date = sensorData[0].created_at;
             const value = sensorData[0].value;
 
@@ -64,17 +67,17 @@
             chartGas.series[0].addPoint(point, true, shift);
 
             // refresh data setiap x detik
-            setTimeout(requestData, 3000);
+            setTimeout(requestData, 3000); //1000ms = 1 detik
         }
     }
 
     window.addEventListener('load', function() {
         chartGas = new Highcharts.Chart({
             chart: {
-                renderTo: 'chartGas',
+                renderTo: 'monitoringGas',
                 defaultSeriesType: 'spline',
                 events: {
-                    load: requestMonitoringGas
+                    load: requestData
                 }
             },
             title: {
@@ -94,12 +97,12 @@
                 }
             },
             series: [{
-                name: 'MQ Sensor',
+                name: 'Sensor Gas',
                 data: []
             }]
         });
 
-        Highcharts.chart('gaugeGas', {
+        Highcharts.chart('MonitoringGas', {
 
             chart: {
                 type: 'gauge',
@@ -125,7 +128,7 @@
             // the value axis
             yAxis: {
                 min: 0,
-                max: 1000,
+                max: 200,
                 tickPixelInterval: 72,
                 tickPosition: 'inside',
                 tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
@@ -141,24 +144,22 @@
                 lineWidth: 0,
                 plotBands: [{
                     from: 0,
-                    to: 500,
+                    to: 130,
                     color: '#55BF3B', // green
                     thickness: 20,
                     borderRadius: '50%'
                 }, {
-                    from: 450,
-                    to: 800,
-                    color: '#DDDF0D', // yellow
+                    from: 150,
+                    to: 200,
+                    color: '#DF5353', // red
                     thickness: 20,
                     borderRadius: '50%'
                 }, {
-                    from: 750,
-                    to: 1000,
-                    color: '#DF5353', // red
-                    thickness: 20,
-
-
-                }, ]
+                    from: 120,
+                    to: 160,
+                    color: '#DDDF0D', // yellow
+                    thickness: 20
+                }]
             },
 
             series: [{
@@ -195,45 +196,17 @@
 
         });
 
+        // Add some life
         setInterval(() => {
-            const chart = Highcharts.charts[1];
+            const chart = Highcharts.charts[0];
             if (chart && !chart.renderer.forExport) {
-                        //load data
-        const result = await fetch("{{ route('api.sensors.mq.index') }}");
-
-        if (result.ok) {
-            //cek jika berhasil
-            const data = await result.json();
-            const sensorData = data.data;
-
-            //parse data
-            const date = sensorData[0].created_at;
-            const value = sensorData[0].value;
-
-            // membuat point
-            const point = [new Date(date).getTime(), Number(value)];
-
-            // menambahkan point ke chart
-            const series = chartGas.series[0],
-                shift = series.data.length > 20;
-            // shift if the series is
-            // longer than 20
-
-            // add the point
-            chartGas.series[0].addPoint(point, true, shift);
-
-            // refresh data setiap x detik
-            setTimeout(requestData, 3000);
-        }
                 const point = chart.series[0].points[0],
-                    inc = Math.round((Math.random() - 0.5) * 100);
+                    inc = Math.round((Math.random() - 0.5) * 20);
 
                 let newVal = point.y + inc;
-                if (newVal < 0 || newVal > 1000) {
+                if (newVal < 0 || newVal > 200) {
                     newVal = point.y - inc;
                 }
-
-                console.log(newVal);
 
                 point.update(newVal);
             }
