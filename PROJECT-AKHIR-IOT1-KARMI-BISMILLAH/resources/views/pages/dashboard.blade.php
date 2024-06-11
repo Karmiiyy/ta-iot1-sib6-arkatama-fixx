@@ -8,7 +8,7 @@
                 <h4 class="card-title">Monitoring Sensor Gas</h4>
                 <p class="card-text">Grafik berikut adalah monitoring sensor gas 3 menit terakhir.</p>
 
-                <div id="monitoringGas"></div>
+                <div id="chartGas"></div>
 
                 <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit lalu</small></p>
             </div>
@@ -21,7 +21,7 @@
                 <h4 class="card-title">Monitoring Gas</h4>
                 <p class="card-text">Grafik berikut adalah monitoring sensor gas 3 menit terakhir.</p>
 
-                <div id="monitoringGas"></div>
+                <div id="MonitoringGas"></div>
 
                 <p class="card-text"><small class="text-muted">Terakhir diubah 3 menit lalu</small></p>
             </div>
@@ -39,9 +39,39 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <script>
-    let chartGas;
+    let chartGas, gaugeGas;
 
-    async function requestData() {
+    async function requestMonitoringGas() {
+        // load data
+        const result = await fetch("{{ route('api.sensors.mq.index') }}");
+
+        if (result.ok) {
+            // cek jika berhasil
+            const data = await result.json();
+            const sensorData = data.data;
+
+            // parse data
+            const date = sensorData[0].created_at;
+            const value = sensorData[0].value;
+
+            // membuat point
+            const point = [new Date(date).getTime(), Number(value)];
+
+            // menambahkan point ke chart
+            const series = chartGas.series[0],
+                shift = series.data.length > 20;
+            // shift if the series is
+            // longer than 20
+
+            // add the point
+            chartGas.series[0].addPoint(point, true, shift);
+
+            // refresh data setiap x detik
+            setTimeout(requestData, 3000); //1000ms = 1 detik
+        }
+    }
+
+    async function requestGaugeGas() {
         // load data
         const result = await fetch("{{ route('api.sensors.mq.index') }}");
 
@@ -74,10 +104,10 @@
     window.addEventListener('load', function() {
         chartGas = new Highcharts.Chart({
             chart: {
-                renderTo: 'monitoringGas',
+                renderTo: 'MonitoringGas',
                 defaultSeriesType: 'spline',
                 events: {
-                    load: requestData
+                    load: requestMonitoringGas
                 }
             },
             title: {
@@ -102,15 +132,19 @@
             }]
         });
 
-        Highcharts.chart('MonitoringGas', {
+        gaugeGas = new Highcharts.Chart({
 
             chart: {
+                renderTo: 'MonitoringGas',
                 type: 'gauge',
                 plotBackgroundColor: null,
                 plotBackgroundImage: null,
                 plotBorderWidth: 0,
                 plotShadow: false,
                 height: '80%'
+                events: {
+                    load: requestGaugeGas
+                }
             },
 
             title: {
@@ -128,7 +162,7 @@
             // the value axis
             yAxis: {
                 min: 0,
-                max: 200,
+                max: 1000,
                 tickPixelInterval: 72,
                 tickPosition: 'inside',
                 tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
@@ -144,21 +178,22 @@
                 lineWidth: 0,
                 plotBands: [{
                     from: 0,
-                    to: 130,
+                    to: 500,
                     color: '#55BF3B', // green
                     thickness: 20,
-                    borderRadius: '50%'
+
                 }, {
-                    from: 150,
-                    to: 200,
+                    from: 450,
+                    to: 800,
+                    color: '#DDDF0D', // yellow
+                    thickness: 20,
+
+                }, {
+                    from: 750,
+                    to: 1000,
                     color: '#DF5353', // red
                     thickness: 20,
-                    borderRadius: '50%'
-                }, {
-                    from: 120,
-                    to: 160,
-                    color: '#DDDF0D', // yellow
-                    thickness: 20
+
                 }]
             },
 
@@ -198,15 +233,18 @@
 
         // Add some life
         setInterval(() => {
-            const chart = Highcharts.charts[0];
+            const chart = Highcharts.charts[1];
             if (chart && !chart.renderer.forExport) {
+                //NANTI PASTE SINI
                 const point = chart.series[0].points[0],
-                    inc = Math.round((Math.random() - 0.5) * 20);
+                    inc = Math.round((Math.random() - 0.5) * 100);
 
                 let newVal = point.y + inc;
-                if (newVal < 0 || newVal > 200) {
+                if (newVal < 0 || newVal > 1000) {
                     newVal = point.y - inc;
                 }
+
+                console.log(newVal);
 
                 point.update(newVal);
             }
