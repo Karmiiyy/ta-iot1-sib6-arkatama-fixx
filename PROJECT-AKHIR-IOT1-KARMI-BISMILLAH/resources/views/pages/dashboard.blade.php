@@ -142,9 +142,9 @@
                 plotBorderWidth: 0,
                 plotShadow: false,
                 height: '80%'
-                events: {
-                    load: requestGaugeGas
-                }
+                // events: {
+                //     load: requestGaugeGas
+                // }
             },
 
             title: {
