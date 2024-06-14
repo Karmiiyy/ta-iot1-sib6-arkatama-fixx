@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\MqSensorController;
+use App\Http\Controllers\Api\RainSensorController;
 use App\Http\Controllers\Api\SensorController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -25,4 +26,7 @@ Route::group(['as' => 'api.'], function () {
 
     Route::resource('sensors/mq', MqSensorController::class)
         ->names('sensors.mq');
+
+    Route::resource('sensors/rain', RainSensorController::class)
+        ->names('sensors.rain');
 });
