@@ -370,7 +370,7 @@
             // the value axis
             yAxis: {
                 min: 0,
-                max: 1000,
+                max: 2000,
                 tickPixelInterval: 72,
                 tickPosition: 'inside',
                 tickColor: Highcharts.defaultOptions.chart.backgroundColor || '#FFFFFF',
@@ -386,19 +386,19 @@
                 lineWidth: 0,
                 plotBands: [{
                     from: 0,
-                    to: 500,
+                    to: 800,
                     color: '#55BF3B', // green
                     thickness: 20,
 
                 }, {
-                    from: 450,
-                    to: 800,
+                    from: 750,
+                    to: 1200,
                     color: '#DDDF0D', // yellow
                     thickness: 20,
 
                 }, {
-                    from: 750,
-                    to: 1000,
+                    from: 1150,
+                    to: 2000,
                     color: '#DF5353', // red
                     thickness: 20,
 
