@@ -1,5 +1,7 @@
 <?php
 
+// use App\Http\Controllers\Api\DHT11_Suhu;
+use App\Http\Controllers\Api\DHT11_SuhuController;
 use App\Http\Controllers\Api\MqSensorController;
 use App\Http\Controllers\Api\RainSensorController;
 use App\Http\Controllers\Api\SensorController;
@@ -29,4 +31,7 @@ Route::group(['as' => 'api.'], function () {
 
     Route::resource('sensors/rain', RainSensorController::class)
         ->names('sensors.rain');
+
+    Route::resource('sensors/dht11_suhu', DHT11_SuhuController::class)
+        ->names('sensors.dht11_suhu');
 });

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DHT11 extends Model
 {
     use HasFactory;
+
+
+    protected $guarded = [];
 }
