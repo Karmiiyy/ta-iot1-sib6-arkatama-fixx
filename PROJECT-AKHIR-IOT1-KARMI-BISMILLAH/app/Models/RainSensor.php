@@ -10,5 +10,5 @@ class RainSensor extends Model
     use HasFactory;
 
 
-    protected $guarded = [];
+    
 }
