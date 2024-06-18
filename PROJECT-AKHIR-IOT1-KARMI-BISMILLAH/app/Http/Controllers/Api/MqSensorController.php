@@ -40,7 +40,6 @@ class MqSensorController extends Controller
             'value' => [
                 'required',
                 'numeric',
-
             ]
         ]);
 

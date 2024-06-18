@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rain_sensors', function (Blueprint $table) {
+        Schema::create('leds', function (Blueprint $table) {
             $table->id();
-            $table->float('value');
+            $table->string('name');
+            $table->string('pin');
+            $table->boolean('status')
+                ->default(false);
             $table->timestamps();
         });
     }
@@ -23,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rain_sensors');
+        Schema::dropIfExists('leds');
     }
 };
