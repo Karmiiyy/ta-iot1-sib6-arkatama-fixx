@@ -53,7 +53,7 @@ class WhatsappNotificationService
     {
         $message .= PHP_EOL;
         $message .= PHP_EOL;
-        $message .= 'Dikirimkan pada tanggal ' . date('Y-m-d H:i:s') . ' oleh IoT Panel Arkatama';
+        $message .= 'Dikirimkan pada tanggal ' . date('Y-m-d H:i:s') . ' oleh IoT Panel JK';
         return $message;
     }
 
@@ -70,7 +70,7 @@ class WhatsappNotificationService
 
     public static function notifikasiKebocoranGasMassal($nilaiSensor)
     {
-        $nilaiMaksimalSensor = 100; //contoh
+        $nilaiMaksimalSensor = 1000; //contoh
         $durasiPesan = 1; //contoh dalam menit
 
         $jenisSensor = 'mq5';

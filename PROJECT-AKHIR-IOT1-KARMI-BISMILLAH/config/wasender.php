@@ -1,6 +1,6 @@
 <?php
 
 return [
-    "token" => "",
-    "endpoint" => ""
+    "token" => "HnpAS+SUNUpQefHeHYBV",
+    "endpoint" => "https://api.fonnte.com"
 ];

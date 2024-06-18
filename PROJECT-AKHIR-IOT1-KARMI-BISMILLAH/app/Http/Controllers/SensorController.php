@@ -21,6 +21,6 @@ class SensorController extends Controller
             'url' => 'LEDControllers.index'
         ];
        
-        return view('pages.sensor.index', $data);
+        return view('pages.sensor', $data);
     }
 }

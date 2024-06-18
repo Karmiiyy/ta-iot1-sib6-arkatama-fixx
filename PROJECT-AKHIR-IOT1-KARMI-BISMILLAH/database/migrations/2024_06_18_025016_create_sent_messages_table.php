@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('l_e_d_s', function (Blueprint $table) {
+        Schema::create('sent_messages', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('pin');
-            $table->boolean('status')
-                ->default(false);
-            $table->timestamps(); //created_at, updated_at
+            $table->string('type');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('l_e_d_s');
+        Schema::dropIfExists('sent_messages');
     }
 };
